@@ -28,7 +28,8 @@ void testApp::setup(){
 	//pct = 0;							// a variable we can alter...
     
     
-    inc = 0.036;
+    //inc = 0.003;  // slowest
+    inc = 0.036;    // fastest
 }
 
 //--------------------------------------------------------------
