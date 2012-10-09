@@ -5,19 +5,23 @@ void testApp::setup(){
 
 	ofSetVerticalSync(true);
 	ofSetCircleResolution(50);
-	
-	firework fw;
-	fw.setup(300, 300);
-	fireworks.push_back(fw);
+	ofEnableAlphaBlending();
 
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
 
+	if (ofGetFrameNum() % 20 == 0) {
+		float x = ofMap(sin(ofGetElapsedTimef()*3), -1, 1, 100, ofGetWidth() - 100);
+		
+		firework fw;
+		fw.setup(x, ofRandom(100, 350));
+		fireworks.push_back(fw);
+	}
+	
+	
 	for (int i = 0; i < fireworks.size(); i++){
-
-		printf("elapsed: %f, lifetime: %f, born: %f\n", fireworks[i].elapsed, fireworks[i].lifetime, fireworks[i].born);
 		
 		if (fireworks[i].elapsed > fireworks[i].lifetime)
 			fireworks.erase(fireworks.begin()+i);

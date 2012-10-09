@@ -18,18 +18,26 @@ class firework {
 public:
 	
 	float lifetime;
+	float ascendTime;
+
 	float born;
 	float elapsed;
-	bool exploded;
-	ofColor c;
 	
-	ofPoint pos;
+	bool exploded;
+
+	ofColor c;
+	int particleCount;
+	
+	ofPoint currentPos;
+	ofPoint targetPos;
 	
 	vector <fireworkParticle> particles;
 	
 	void setup(int x, int y);
 	void update();
 	void draw();
+	
+	void explode();
 	
 };
 

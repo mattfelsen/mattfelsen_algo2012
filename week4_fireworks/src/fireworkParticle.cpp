@@ -35,7 +35,7 @@ void fireworkParticle::addForce(float x, float y) {
 	// Assuming y will be a small number (e.g. 0.01 or 0.05)
 	// Use linear interpolation to xeno from whatever theta is
 	// and get closer to an angle of 3π/2, which points downward
-	theta = (1-y) * theta + y * 3 * HALF_PI;
+	theta = (1-y) * theta + y * (3 * PI / 2);
 }
 
 void fireworkParticle::addDampingForce() {
@@ -63,7 +63,7 @@ void fireworkParticle::draw() {
 	ofTranslate(10, 0);
 	
 	//ofCircle(pos.x, pos.y, 3);
-	ofCircle(0, 0, 3);
+	ofCircle(0, 0, 5);
 	
 	ofPopMatrix();
 
