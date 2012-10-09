@@ -22,7 +22,7 @@ void recorder::setup(int hue, int shape) {
 
 void recorder::draw() {
 
-	if (recording) {
+	if (showPath) {
 
 		ofNoFill();
 		ofSetColor(255);
@@ -61,6 +61,7 @@ void recorder::start(float x, float y) {
 	
 	recording = true;
 	startTime = ofGetElapsedTimef();
+	showPath = true;
 	
 }
 
@@ -80,6 +81,7 @@ void recorder::add(float x, float y) {
 void recorder::end() {
 
 	recording = false;
+	showPath = false;
 	
 }
 

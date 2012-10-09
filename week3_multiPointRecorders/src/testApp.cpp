@@ -56,6 +56,14 @@ void testApp::keyPressed(int key){
 			recorders[i].setShapeCount(shapeCount);
 		}
 	}
+	
+	// p toggles showing the paths
+	if (key == 112) {
+		for (int i = 0; i < recorders.size(); i++) {
+			recorders[i].showPath = !recorders[i].showPath;
+		}
+	}
+	
 }
 
 //--------------------------------------------------------------

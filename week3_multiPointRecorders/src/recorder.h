@@ -41,6 +41,7 @@ public:
 	ofColor color;
 	int shapeType;
 	int shapeCount;
+	bool showPath;
 	
 };
 
