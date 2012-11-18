@@ -71,6 +71,10 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
+
+	if (savePDF == true){
+        ofBeginSaveScreenAsPDF("screenshot-"+ofGetTimestampString()+".pdf", false);
+    }
 	
 	ofBackground(0);
 	
@@ -78,9 +82,15 @@ void testApp::draw(){
 	//VF.draw();
 	
 	for (int i = 0; i < particles.size(); i++){
-		particles[i].draw();
+		if (!particles[i].magic)
+			particles[i].draw();
 	}
+
 	
+	if (savePDF){
+		ofEndSaveScreenAsPDF();
+        savePDF = false;
+	}
 }
 
 //--------------------------------------------------------------
@@ -88,6 +98,9 @@ void testApp::keyPressed  (int key){
 	if (key == ' ') {
 		VF.clear();
 	}
+
+	if (key == 'r')
+		savePDF = true;
 }
 
 //--------------------------------------------------------------
