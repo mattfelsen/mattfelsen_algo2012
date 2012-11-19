@@ -14,6 +14,8 @@ void testApp::setup(){
 	int basisColor = ofRandom(255);
 	int colors = 3;
 	
+	creatures.clear();
+	
 	// creature a bunch of creatures
 	for (int i = 0; i < 50; i++) {
 		creature c;
@@ -58,8 +60,8 @@ void testApp::draw(){
 
 //--------------------------------------------------------------
 void testApp::keyPressed  (int key){ 
-	
-	
+	if (key == ' ')
+		setup();
 }
 
 //--------------------------------------------------------------
