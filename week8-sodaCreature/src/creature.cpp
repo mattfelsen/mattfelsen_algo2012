@@ -120,7 +120,7 @@ void creature::update() {
 	
 	for (int i = 0; i < particles.size(); i++){
 		particles[i]->addForce(0,0.1f);
-		//particles[i]->addRepulsionForce(mouseX, mouseY, 300, 0.7f);
+		particles[i]->addRepulsionForce(mouseX, mouseY, 75, 3);
 	}
 	
 	for (int i = 0; i < springs.size(); i++){
@@ -152,24 +152,24 @@ void creature::draw() {
 	// draw the whole thing as one shape so that you can tell
 	// when the feet are inside the body. kind of cute!
 	
-//	ofBeginShape();
-//	
-//	ofVertex(particles[0]->pos.x, particles[0]->pos.y);
-//	ofVertex(particles[1]->pos.x, particles[1]->pos.y);
-//	
-//	ofVertex(particles[4]->pos.x, particles[4]->pos.y);
-//	
-//	ofVertex(particles[6]->pos.x, particles[6]->pos.y);
-//	ofVertex(particles[7]->pos.x, particles[7]->pos.y);
-//	
-//	ofVertex(particles[5]->pos.x, particles[5]->pos.y);
-//	
-//	ofVertex(particles[2]->pos.x, particles[2]->pos.y);
-//	ofVertex(particles[3]->pos.x, particles[3]->pos.y);
-//	
-//	ofVertex(particles[0]->pos.x, particles[0]->pos.y);
-//	
-//	ofEndShape();
+	//	ofBeginShape();
+	//	
+	//	ofVertex(particles[0]->pos.x, particles[0]->pos.y);
+	//	ofVertex(particles[1]->pos.x, particles[1]->pos.y);
+	//	
+	//	ofVertex(particles[4]->pos.x, particles[4]->pos.y);
+	//	
+	//	ofVertex(particles[6]->pos.x, particles[6]->pos.y);
+	//	ofVertex(particles[7]->pos.x, particles[7]->pos.y);
+	//	
+	//	ofVertex(particles[5]->pos.x, particles[5]->pos.y);
+	//	
+	//	ofVertex(particles[2]->pos.x, particles[2]->pos.y);
+	//	ofVertex(particles[3]->pos.x, particles[3]->pos.y);
+	//	
+	//	ofVertex(particles[0]->pos.x, particles[0]->pos.y);
+	//	
+	//	ofEndShape();
 	
 	
 	// different method for drawing the creature with different
@@ -193,6 +193,23 @@ void creature::draw() {
 	ofVertex(particles[7]->pos.x, particles[7]->pos.y);
 	ofEndShape();
 	
+
+	// draw the eyes
+	// calculate a point partway between the top two points
+	// calculate a point partway between the bottom two points
+	// then calculate a point partway between these two points
+	ofPoint leftShiftedTop = particles[0]->pos.getInterpolated(particles[3]->pos, 0.15);
+	ofPoint leftShiftedBot = particles[1]->pos.getInterpolated(particles[2]->pos, 0.15);
+	ofPoint leftEye = leftShiftedTop.getInterpolated(leftShiftedBot, 0.15);
+
+	ofPoint rightShiftedTop = particles[0]->pos.getInterpolated(particles[3]->pos, 0.85);
+	ofPoint rightShiftedBot = particles[1]->pos.getInterpolated(particles[2]->pos, 0.85);
+	ofPoint rightEye = rightShiftedTop.getInterpolated(rightShiftedBot, 0.15);
+	
+	ofSetColor(50, 200);
+	ofCircle(leftEye, size/13);
+	ofCircle(rightEye, size/13);
+	
 }
 
 void creature::createSpring(particle * p1, particle * p2) {
@@ -207,4 +224,10 @@ void creature::createSpring(particle * p1, particle * p2) {
 	s.distance = s.restLength;
 	
 	springs.push_back(s);
+}
+
+
+void creature::repelMouse(float x, float y) {
+	mouseX = x;
+	mouseY = y;
 }

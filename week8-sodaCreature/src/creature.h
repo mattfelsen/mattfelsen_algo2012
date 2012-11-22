@@ -23,6 +23,7 @@ public:
 	void draw();
 	
 	void createSpring(particle * p1, particle * p2);
+	void repelMouse(float x, float y);
 
 	ofPoint pos;
 	float size;
@@ -33,6 +34,8 @@ public:
 	
 	vector <particle * > particles;
 	vector <spring> springs;
+	
+	float mouseX, mouseY;
 	
 };
 

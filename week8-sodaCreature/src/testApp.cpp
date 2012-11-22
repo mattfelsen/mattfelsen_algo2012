@@ -70,6 +70,9 @@ void testApp::keyReleased  (int key){
 
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y ){
+	for (int i = 0; i < creatures.size(); i++) {
+		creatures[i].repelMouse(x, y);
+	}
 }
 
 //--------------------------------------------------------------
