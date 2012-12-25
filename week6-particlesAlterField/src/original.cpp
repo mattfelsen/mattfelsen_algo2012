@@ -1,5 +1,3 @@
-// fluidy and less jarring than my original
-
 #include "testApp.h"
 
 
@@ -49,14 +47,9 @@ void testApp::update(){
 		//particles[i].addCounterClockwiseForce(mouseX, mouseY, 1000, 0.1);
 		//particles[i].addClockwiseForce(mouseX, mouseY, 200, 1);
 		
-		if (i % 20 == 0){ //particles[i].magic) {
-			
-			ofVec2f vel = particles[i].vel;
-			vel.normalize();
-			
-			VF.addVectorCircle(particles[i].pos.x, particles[i].pos.y, vel.x * 0.2, vel.y * 0.2, 60, 1.3) ;
-			VF.addInwardCircle(particles[i].pos.x, particles[i].pos.y, 150, 0.4) ;
-			//particles[i].addAttractionForce(-500, particles[i].initialY, 2000, 5);
+		if (particles[i].magic) {
+			VF.addInwardCircle(particles[i].pos.x, particles[i].pos.y, 350, 1) ;
+			particles[i].addAttractionForce(-500, particles[i].initialY, 2000, 5);
 		}
 		
 		particles[i].addDampingForce();
@@ -72,7 +65,7 @@ void testApp::update(){
 		}
 	}
 	
-	VF.fadeField(0.91f);
+	VF.fadeField(0.99f);
 	
 }
 
@@ -89,8 +82,8 @@ void testApp::draw(){
 	//VF.draw();
 	
 	for (int i = 0; i < particles.size(); i++){
-		//if (!particles[i].magic)
-		particles[i].draw();
+		if (!particles[i].magic)
+			particles[i].draw();
 	}
 	
 	

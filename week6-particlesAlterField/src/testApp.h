@@ -27,6 +27,7 @@ public:
 	vectorField VF;
 	
 	float timer;
+	bool savePDF;
 	
 	
 };

@@ -1,4 +1,4 @@
-// fluidy and less jarring than my original
+// nice version with clustering
 
 #include "testApp.h"
 
@@ -32,7 +32,7 @@ void testApp::update(){
 	
 	for (int i = 0; i < particles.size(); i++){
 		
-		particles[i].addAttractionForce(-500, particles[i].initialY, 2000, 2);
+		particles[i].addAttractionForce(-500, particles[i].initialY, 2000, 0.5);
 		//particles[i].addRepulsionForce(mouseX, mouseY, 125, 2.5);
 		
 		// get the force from the vector field:
@@ -41,7 +41,7 @@ void testApp::update(){
 		particles[i].addForce(frc.x, frc.y);
 		
 		for (int j = 0; j < i; j++){
-			particles[i].addRepulsionForce(particles[j], 50, 0.4);
+			particles[i].addRepulsionForce(particles[j], 50, 0.04);
 		}
 	}
 	
@@ -49,13 +49,13 @@ void testApp::update(){
 		//particles[i].addCounterClockwiseForce(mouseX, mouseY, 1000, 0.1);
 		//particles[i].addClockwiseForce(mouseX, mouseY, 200, 1);
 		
-		if (i % 20 == 0){ //particles[i].magic) {
+		if (i % 3 == 0){ //particles[i].magic) {
 			
 			ofVec2f vel = particles[i].vel;
 			vel.normalize();
 			
-			VF.addVectorCircle(particles[i].pos.x, particles[i].pos.y, vel.x * 0.2, vel.y * 0.2, 60, 1.3) ;
-			VF.addInwardCircle(particles[i].pos.x, particles[i].pos.y, 150, 0.4) ;
+			VF.addVectorCircle(particles[i].pos.x, particles[i].pos.y, vel.x * 0.1, vel.y * 0.1, 60, 1.3) ;
+			VF.addInwardCircle(particles[i].pos.x, particles[i].pos.y, 120, 0.1) ;
 			//particles[i].addAttractionForce(-500, particles[i].initialY, 2000, 5);
 		}
 		
@@ -72,13 +72,13 @@ void testApp::update(){
 		}
 	}
 	
-	VF.fadeField(0.91f);
+	VF.fadeField(0.81f);
 	
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
-	
+
 	if (savePDF == true){
         ofBeginSaveScreenAsPDF("screenshot-"+ofGetTimestampString()+".pdf", false);
     }
@@ -90,9 +90,9 @@ void testApp::draw(){
 	
 	for (int i = 0; i < particles.size(); i++){
 		//if (!particles[i].magic)
-		particles[i].draw();
+			particles[i].draw();
 	}
-	
+
 	
 	if (savePDF){
 		ofEndSaveScreenAsPDF();
@@ -105,7 +105,7 @@ void testApp::keyPressed  (int key){
 	if (key == ' ') {
 		VF.clear();
 	}
-	
+
 	if (key == 'r')
 		savePDF = true;
 }
