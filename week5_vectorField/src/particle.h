@@ -1,14 +1,30 @@
-//
-//  particle.h
-//  week5_vectorField
-//
-//  Created by Matt on 10/20/12.
-//
-//
+#ifndef PARTICLE_H
+#define PARTICLE_H
 
-#ifndef __week5_vectorField__particle__
-#define __week5_vectorField__particle__
+#include "ofMain.h"
 
-#include <iostream>
+class particle
+{
+    public:
+	
+        ofVec2f pos;
+        ofVec2f vel;
+        ofVec2f frc;   // frc is also know as acceleration (newton says "f=ma")
+			
+        particle();
+		virtual ~particle(){};
 
-#endif /* defined(__week5_vectorField__particle__) */
+        void resetForce();
+        void addForce(float x, float y);
+        void addDampingForce();
+        void setInitialCondition(float px, float py, float vx, float vy);
+        void update();
+        void draw();
+	
+		float damping;
+
+    protected:
+    private:
+};
+
+#endif // PARTICLE_H
